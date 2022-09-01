@@ -12,8 +12,8 @@ public interface UsersDao {
 
 	public List<Users> findAll();
 
-	public void deleteById(Integer id);
-
 	public void update(Users users);
+	
+	public void delete(Integer id);
 
 }

@@ -39,7 +39,7 @@ public class UsersController {
 
 	@DeleteMapping("/users/{id}")
 	public RespDto<?> delete(@PathVariable Integer id) {
-		usersDao.deleteById(id);
+		usersDao.delete(id);
 		return new RespDto<>(1, "성공", null);
 	}
 

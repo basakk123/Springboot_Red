@@ -17,7 +17,7 @@
 		SELECT * FROM users ORDER BY id DESC
 	</select>
 	
-	<delete id="deleteById">
+	<delete id="delete">
 		DELETE FROM users WHERE id = #{id}
 	</delete>
 	
