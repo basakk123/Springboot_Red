@@ -19,6 +19,7 @@ import site.metacoding.red.web.dto.response.RespDto;
 public class BoardsController {
 
 	private final BoardsDao boardsDao;
+	
 
 	@PostMapping("/boards")
 	public RespDto<?> insert(WriteDto writeDto) { // x-www 형식
@@ -28,7 +29,18 @@ public class BoardsController {
 
 	@GetMapping("/boards")
 	public RespDto<?> getBoardsList() {
-		return new RespDto<>(1, "글조회성공", boardsDao.findAll());
+		return new RespDto<>(1, "글전체조회성공", boardsDao.findAll());
+	}
+
+	@GetMapping("/boards/{id}")
+	public RespDto<?> getOne(@PathVariable Integer id) {
+		return new RespDto<>(1, "글조회성공", boardsDao.findByIdtoDetail(id));
+	}
+
+	@DeleteMapping("/boards/{id}")
+	public RespDto<?> delete(@PathVariable Integer id) {
+		boardsDao.delete(id);
+		return new RespDto<>(1, "글삭제성공", null);
 	}
 
 	@PutMapping("/boards/{id}")
@@ -40,17 +52,6 @@ public class BoardsController {
 		// update 실행
 		boardsDao.update(boardsPS);
 		return new RespDto<>(1, "글수정성공", null);
-	}
-
-	@GetMapping("/boards/{id}")
-	public RespDto<?> getBoards(@PathVariable Integer id) {
-		return new RespDto<>(1, "성공", boardsDao.findById(id));
-	}
-
-	@DeleteMapping("/boards/{id}")
-	public RespDto<?> delete(@PathVariable Integer id) {
-		boardsDao.delete(id);
-		return new RespDto<>(1, "삭제성공", null);
 	}
 
 }
